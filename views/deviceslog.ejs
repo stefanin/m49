@@ -1,0 +1,54 @@
+
+<script>
+      $(document).ready(function(){
+      $("#<%=idSession%>Input").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#<%=idSession%>Table tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+      $("#DevicesLogReload").click(function(){ GetP("#main", "/deviceslog");});
+    });
+</script>
+
+<span class="badge badge-primary"><%=contaRiga%></span> &ensp;&ensp;<input id="<%=idSession%>Input" type="text" class="mr-sm-2" placeholder="search in the table ..">
+<span id="DevicesLogReload" class="badge badge-primary">Reload</span>
+<table  class="table table-sm">
+    <thead>
+        
+        <td scope="col">Date</td>
+        <td scope="col">Name</td>
+        <td scope="col">User</td>
+        <td scope="col">IP</td>
+        <td scope="col">System</td>
+        <td scope="col">Serial_Number</td>
+        <td scope="col">Manufacturer</td>
+        <td scope="col">Model</td>
+        
+
+        
+    </thead>
+    <tbody id="<%=idSession%>Table">
+        <% docs.forEach(function(d){ %> <!-- ciclo for tipo d in docs -->
+            <tr  scope="row" onclick="#GetP('#<%=d.id%>mmenu','/mmenu/<%=d.id%>mmenu&<%=d.Name%>&<%=d.IP%>')">
+                <!-- il carattere '=' estrapola un valore -->
+                <script>
+                    var data = "<%=d.date%>".split(" ");
+                    document.getElementById("<%=d.id%>D").innerHTML = data[3]+" "+data[1]+" "+data[2]+" "+data[4]
+                </script>
+                
+                <td scope="row" id="<%=d.id%>D"></td>
+                <td scope="row"><%=d.Name%></td>
+                <td scope="row"><%=d.User %></td>
+                <td scope="row"><%=d.IP %></td>
+                <td scope="row"><%=d.System %></td>
+                <td scope="row"><%=d.Serial_Number%></td>
+                <td scope="row"><%=d.Manufacturer%></td>
+                <td scope="row"><%=d.Model%></td>
+
+            </tr>
+            <tr id="<%=d.id%>mmenu" style="padding:0px;border: none;"></tr>
+            
+        <% }) %>
+    </tbody>
+</table>

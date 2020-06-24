@@ -1,0 +1,15 @@
+
+<td class="mmenu">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#infoModal" onclick="GetP('#infoModalBody','/devices/<%=id%>')">
+    info
+    </button>
+</td>
+<td class="mmenu">
+    <a onclick="GetP('#<%=contenitore%>name','/ping/<%=name%>')">ping</a>
+    <div id="<%=contenitore%>name"></div>
+</td>
+<td class="mmenu"></td>
+<td class="mmenu">
+    <a onclick="GetP('#<%=contenitore%>ip','/ping/<%=ip%>')">ping</a>
+    <div id="<%=contenitore%>ip"></div>
+</td>

@@ -1,0 +1,44 @@
+
+<script>
+      $(document).ready(function(){
+      $("#<%=idSession%>Input").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#<%=idSession%>Table tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+      $("#SyslogReload").click(function(){ GetP("#main", "/syslog");});
+    });
+</script>
+
+<span class="badge badge-primary"><%=contaRiga%></span> &ensp;&ensp;<input id="<%=idSession%>Input" type="text" class="mr-sm-2" placeholder="search in the table ..">
+<span id="SyslogReload" class="badge badge-primary">Reload</span>
+<table  class="table table-sm">
+    <thead>
+        
+        <td scope="col">Status</td>
+        <td scope="col">date</td>
+        <td scope="col">host</td>
+        <td scope="col">message</td>
+        
+
+        
+    </thead>
+    <tbody id="<%=idSession%>Table">
+        <% docs.forEach(function(d){ %> <!-- ciclo for tipo d in docs -->
+            <tr  scope="row" >
+                <script>
+                    var data = "<%=d.date%>".replace("GMT+0000 (Coordinated Universal Time)","");
+                    document.getElementById("<%=d.id%>D").innerHTML = data
+                </script>
+                
+                
+                <td scope="row"><%=d.Status%></td>
+                <td scope="row" id="<%=d.id%>D"></td>
+                <td scope="row"><%=d.host%></td>
+                <td scope="row"><%=d.message%></td>
+            </tr>
+            
+        <% }) %>
+    </tbody>
+</table>

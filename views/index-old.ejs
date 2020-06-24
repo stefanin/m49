@@ -1,0 +1,48 @@
+<% layout('default') -%>
+
+<script>
+      $(document).ready(function(){
+      $("#<%=idSession%>Input").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#<%=idSession%>Table tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+</script>
+
+<span class="badge badge-primary"><%=contaRiga%></span> &ensp;&ensp;<input id="<%=idSession%>Input" type="text" class="mr-sm-2" placeholder="search in the table ..">
+<table  class="table table-sm">
+    <thead>
+        <td scope="col">Computer_Name</td>
+        <td scope="col">Top_Console_User</td>
+        <td scope="col">Operating_System</td>
+        <td scope="col">Serial_Number</td>
+        <td scope="col">Manufacturer</td>
+        <td scope="col">Model</td>
+        <td scope="col">Memory_KBytes</td>
+        <td scope="col">Processor_GHz</td>
+        <td scope="col">Total_Disk_Space_MB</td>
+        <td scope="col">Free_Disk_Space_MB</td>
+        
+    </thead>
+    <tbody id="<%=idSession%>Table">
+        <% docs.forEach(function(d){ %> <!-- ciclo for tipo d in docs -->
+            <tr id="<%=d.id%>" scope="row">
+                <!-- il carattere '=' estrapola un valore -->
+                <td scope="row"><%=d.Computer_Name %></td>
+                <td scope="row"><%=d.Top_Console_User %></td>
+                <td scope="row"><%=d.Operating_System %></td>
+                <td scope="row"><%=d.Serial_Number%></td>
+                <td scope="row"><%=d.Manufacturer%></td>
+                <td scope="row"><%=d.Model%></td>
+                <td scope="row"><%=d.Memory_KBytes%></td>
+                <td scope="row"><%=d.Processor_GHz%></td>
+                <td scope="row"><%=d.Total_Disk_Space_MB%></td>
+                <td scope="row"><%=d.Free_Disk_Space_MB%></td>
+            </tr>
+            <tr><td colspan="3" style="padding:0px;border: none;"></td></tr>
+            
+        <% }) %>
+    </tbody>
+</table>

@@ -1,0 +1,25 @@
+{
+  "name": "sortable-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "m49.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon m49.js"
+  },
+  "author": "stefanin",
+  "license": "ISC",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "cookie-session": "^1.4.0",
+    "ejs-mate": "^3.0.0",
+    "express": "^4.17.1",
+    "express-ip": "^1.0.4",
+    "fs": "0.0.1-security",
+    "helmet": "^3.22.0",
+    "https": "^1.0.0",
+    "mongoose": "^5.9.12",
+    "nodemon": "^2.0.4",
+    "syslog-server": "^1.0.1"
+  }
+}

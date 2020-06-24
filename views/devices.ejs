@@ -1,0 +1,64 @@
+
+<script>
+      $(document).ready(function(){
+      $("#<%=idSession%>Input").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#<%=idSession%>Table tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+</script>
+
+<span class="badge badge-primary"><%=contaRiga%></span> &ensp;&ensp;<input id="<%=idSession%>Input" type="text" class="mr-sm-2" placeholder="search in the table ..">
+<table  class="table table-sm">
+    <thead>
+        <td scope="col">Status</td>
+        <td scope="col">Name</td>
+        <td scope="col">User</td>
+        <td scope="col">IP</td>
+        <td scope="col">System</td>
+        <td scope="col">Serial_Number</td>
+        <td scope="col">Manufacturer</td>
+        <td scope="col">Model</td>
+        <td scope="col">Location</td>
+
+        
+    </thead>
+    <tbody id="<%=idSession%>Table">
+        <% docs.forEach(function(d){ %> <!-- ciclo for tipo d in docs -->
+            <tr  scope="row" onclick="GetP('#<%=d.id%>mmenu','/mmenu/<%=d.id%>mmenu&<%=d.Name%>&<%=d.IP%>&<%=d.id%>')">
+                <!-- il carattere '=' estrapola un valore -->
+                <script>
+                    if("<%=d.Status %>"=="0"){
+                        document.getElementById("<%=d.id%>S").innerHTML = "<%=d.Status %>".replace("0","<span class=\"badge badge-danger\">Danger</span>");
+                    }
+                    if("<%=d.Status %>"=="1"){
+                        document.getElementById("<%=d.id%>S").innerHTML = "<%=d.Status %>".replace("1","<span class=\"badge badge-warning\">Warning</span>");
+                    }
+                    if("<%=d.Status %>"=="2"){
+                        document.getElementById("<%=d.id%>S").innerHTML = "<%=d.Status %>".replace("2","<span class=\"badge badge-info\">Man.</span>");
+                    }
+                    if("<%=d.Status %>"=="3"){
+                        document.getElementById("<%=d.id%>S").innerHTML = "<%=d.Status %>".replace("3","<span class=\"badge badge-success\">Good</span>");
+                    }
+                </script>
+                <td scope="row" id="<%=d.id%>S" title="<%=d.date%>" ><%=d.Status %></td>
+                <td scope="row" >
+                    <%=d.Name%> <br>
+                    <span id="<%=d.id%>mmenu" style="padding:0px;border: none;"></span>
+                </td>
+                <td scope="row"><%=d.User %></td>
+                <td scope="row"><%=d.IP %></td>
+                <td scope="row"><%=d.System %></td>
+                <td scope="row"><%=d.Serial_Number%></td>
+                <td scope="row"><%=d.Manufacturer%></td>
+                <td scope="row"><%=d.Model%></td>
+
+            </tr>
+            
+            
+            
+        <% }) %>
+    </tbody>
+</table>
