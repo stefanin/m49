@@ -1,15 +1,12 @@
 #! /usr/bin/python3.8
 #pm2 start bin/M49server.py --name M49server.py --interpreter python3.8 --restart-delay 180000
 
-import pymongo
-import time
-RELEASE="M49server 0.5.3 build 20.6.24"
-client = pymongo.MongoClient("mongodb://localhost:27017/")
-db = client["M49"]
+from M49lib import *
 deviceslog = db["deviceslog"]
 devices = db["devices"]
 
 print (RELEASE," start %s" % time.ctime(), flush=True)
+cputemp()
 for log in deviceslog.find({'Status':0}):
     print(log['Name'])
     newdevice=True
