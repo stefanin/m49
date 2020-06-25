@@ -1,0 +1,13 @@
+node_modules/
+M49.pptx
+M49.txt
+public/download/M49.exe
+public/download/M49Client.exe
+batch/importLocation.bat 
+batch/importcsv.bat 
+batch/install.bat 
+batch/installAsset.bat
+doc/M49.pptx 
+doc/M49.txt
+bin/__pycache__
+tmp/__pycache__

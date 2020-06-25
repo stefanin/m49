@@ -1,8 +1,8 @@
-
-SERVER_URL = "https://192.168.1.242"
+RELEASE="M49Client 0.5.4 build 20.6.24"
+SERVERIP="192.168.1.3"
+SERVER_URL = "https://"+SERVERIP
 INFO = "/info"
 DEVICESLOG="/deviceslog-add"
-
 import requests
 import socket
 import getpass
@@ -10,6 +10,10 @@ import time
 import os
 import sys
 import urllib3
+import wmi
+import logging
+import logging.handlers
+import datetime
 urllib3.disable_warnings()
 NewTestTime=900
 ncliclo = 0
@@ -19,10 +23,15 @@ proxies = {
   "https": None,
 }
 
+# configure SysLog
+M49logger = logging.getLogger('M49Logger')
+M49logger.setLevel(logging.INFO)
+handler = logging.handlers.SysLogHandler(address = ('192.168.1.3',514))
+M49logger.addHandler(handler)
 
 
-hostname = socket.gethostname()
-username = getpass.getuser().lower()
+
+
 
 #by github.com/angeloped/get_serial_number.py
 # wmic bios get serialnumber#Windows
@@ -62,10 +71,27 @@ def dirtree(dir='.'):
           fileslog.append(filesdato)
     return fileslog
 
+def SendProcessLog():
+    SendProcessLogdate=datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.117Z")
+    #print(SendProcessLogdate)
+    if "Windows" in System:
+        conn = wmi.WMI()
+        syslogMSGNum=0
+        for process in conn.Win32_Process():
+            processrecord =hostname+","+str(process.ProcessId)+","+process.Name+","+str(SendProcessLogdate)+","
+            #print(process.ProcessId, process.HandleCount, process.Name)
+            syslogMSG='INProcessLog#'+str(processrecord)
+            M49logger.info(syslogMSG)
+            syslogMSGNum+=1
+        print("Send ",syslogMSGNum," process")
+
+
+hostname = socket.gethostname()
+username = getpass.getuser().lower()
 serialNumber=getSerialNumber()
 System= getSystem()
+print(RELEASE,hostname,username,serialNumber,System)
 
-print (serialNumber)
 
 #wmic bios get Name,Manufacturer,ReleaseDate,SerialNumber,SMBIOSBIOSVersion
 #wmic OS get Caption,OSArchitecture,Version
@@ -91,6 +117,7 @@ while True: #invio dati ogni NewTestTime
                 data = {'IP': ip, 'Name': hostname, 'User': username,'Serial_Number': serialNumber, 'System':System, 'numFiles': numFiles }
                 richiesta= requests.post(url = SERVER_URL+DEVICESLOG, data = data,proxies=proxies, verify=False)
                 print(richiesta.text)
+                SendProcessLog()
                 break
         except:
             pass

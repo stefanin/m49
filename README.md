@@ -30,8 +30,20 @@ pm2 start bin/M49server.py --name M49server.py --interpreter python3.8 --restart
 
 **HTTPS certificate:**
 
+**M49Client:**
+   Windows:
+    Install the pyinstaller:
+        pip install pyinstaller
+    Create the M49Cient.exe:
+        cd m49\bin
+        pyinstaller.exe -F .\M49Client.py
+    Copy the M49Client.exe to download directory     
+
+   Mac:
+   Linux:
 
 **Release :**
+0.5.4 build 20.6.25 add feature CPU temperature
 
 0.5.2 build 20.6.24 syslogdel-add.py new script for insert message in syslogdel - M49server.py clear syslog collection from syslogdel collection  
                     
