@@ -21,7 +21,7 @@ git clone https://github.com/stefanin/m49.git
 
 cd m49
 
-npm init
+npm install
 
 pm2 start m49.js --name m49
 
