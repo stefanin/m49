@@ -23,6 +23,12 @@ cd m49
 
 npm install
 
+python3 bin/M49install.py
+
+npm install -g pm2
+
+pm2 startup systemd
+
 pm2 start m49.js --name m49
 
 pm2 start bin/M49server.py --name M49server.py --interpreter python3.8 --restart-delay 180000
