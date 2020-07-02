@@ -8,7 +8,7 @@ mongodb 3.6.8 - nodejs 10.19.0 - npm 6.14.4 - Python 3.8.2 - pymongo 3.10.1
 
 **Prerequisites installation sequence :**
 
-apt install -y net-tools nodejs npm mongodb dos2unix python3-pip
+apt install -y net-tools nodejs npm mongodb dos2unix python3-pip git
 
 pip3 install pymongo
 
