@@ -9,17 +9,23 @@ db = client.M49
 DATEserver=datetime.datetime.now()
 db.devices.update_one({'Name':M49Servername}, {'$set':{'date': DATEserver, 'System':RELEASE}})
 
+    
 def cputemp():
     '''
     2020.6.24 verify the cpu temperature and add to systemlog and devices
+    2020.7.2 try/except if not the host is a Raspberry PI
     '''
-    with open(r"/sys/class/thermal/thermal_zone0/temp") as File:
-        CurrentTemp = File.readline()
-    CPUtemp=str(float(CurrentTemp) / 1000)
-    print('CPU Temperature',CPUtemp)
-    db.systemlog.insert_one({'date': DATEserver, 'CPUtemp': CPUtemp})
-    db.devices.update_one({'Name':M49Servername}, {'$set':{'CPUtemp': CPUtemp}})
-    File.close()
+    try:
+        with open(r"/sys/class/thermal/thermal_zone0/temp") as File:
+            CurrentTemp = File.readline()
+        CPUtemp=str(float(CurrentTemp) / 1000)
+        print('CPU Temperature',CPUtemp)
+        db.systemlog.insert_one({'date': DATEserver, 'CPUtemp': CPUtemp})
+        db.devices.update_one({'Name':M49Servername}, {'$set':{'CPUtemp': CPUtemp}})
+        File.close()
+        
+    except:
+        print(' file not found')
 
 def ProcessLog():
     '''
