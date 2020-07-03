@@ -10,6 +10,7 @@ const Devices = new Schema({
     Manufacturer : { type:String},
     Model : { type:String},
     Location : { type:String},
+    Uptime : { type:String},
     date: { type: Date },
     numFiles : { type:Number}
 
