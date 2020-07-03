@@ -10,7 +10,7 @@ cputemp()
 ProcessLog()
 print("************* deviceslog ", end="")
 conta=0
-for log in deviceslog.find({'Status':0}):
+for log in deviceslog.find({'Status': None }):
     #print(log['Name'])
     newdevice=True
     log_id=log['_id']
