@@ -2,7 +2,7 @@ import pymongo
 import time
 import datetime
 
-RELEASE="M49server 0.5.4 build 20.6.24"
+RELEASE="M49server 0.5.4 build 20.7.5"
 M49Servername='server3'
 client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client.M49
