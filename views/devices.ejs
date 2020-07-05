@@ -30,18 +30,8 @@
             <tr  scope="row" onclick="GetP('#<%=d.id%>mmenu','/mmenu/<%=d.id%>mmenu&<%=d.Name%>&<%=d.IP%>&<%=d.id%>')">
                 <!-- il carattere '=' estrapola un valore -->
                 <script>
-                    if("<%=d.Status %>"=="0"){
-                        document.getElementById("<%=d.id%>S").innerHTML = "<%=d.Status %>".replace("0","<span class=\"badge badge-danger\">Danger</span>");
-                    }
-                    if("<%=d.Status %>"=="1"){
-                        document.getElementById("<%=d.id%>S").innerHTML = "<%=d.Status %>".replace("1","<span class=\"badge badge-warning\">Warning</span>");
-                    }
-                    if("<%=d.Status %>"=="2"){
-                        document.getElementById("<%=d.id%>S").innerHTML = "<%=d.Status %>".replace("2","<span class=\"badge badge-info\">Man.</span>");
-                    }
-                    if("<%=d.Status %>"=="3"){
-                        document.getElementById("<%=d.id%>S").innerHTML = "<%=d.Status %>".replace("3","<span class=\"badge badge-success\">Good</span>");
-                    }
+                    
+                    FormattaStatus("<%=d.id%>S","<%=d.Status %>");
                 </script>
                 <td scope="row" id="<%=d.id%>S" title="<%=d.date%>" ><%=d.Status %></td>
                 <td scope="row" >
