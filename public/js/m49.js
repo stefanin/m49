@@ -35,3 +35,26 @@ function GetP(contenitore, url)
 function mmenu(contenitore){
     alert('eccolo');
 }
+// 2020 07 05 convert date ISO format in gg/mm/hhhh O:M:s
+function FormattaData(iddata,data){
+                    var dd = new Date(data);
+                    document.getElementById(iddata).innerHTML = dd.toLocaleDateString('en-GB')+" "+dd.toLocaleTimeString('en-GB');
+
+}
+
+//2020 07 05 format the status code
+function FormattaStatus(idstatus,status){ 
+    if(status=="0"){
+        document.getElementById(idstatus).innerHTML = status.replace("0","<span class=\"badge badge-danger\">Danger</span>");
+    }
+    if(status=="1"){
+        document.getElementById(idstatus).innerHTML = status.replace("1","<span class=\"badge badge-warning\">Warning</span>");
+    }
+    if(status=="2"){
+        document.getElementById(idstatus).innerHTML = status.replace("2","<span class=\"badge badge-info\">Man.</span>");
+    }
+    if(status=="3"){
+        document.getElementById(idstatus).innerHTML = status.replace("3","<span class=\"badge badge-success\">Good</span>");
+    }
+
+}
