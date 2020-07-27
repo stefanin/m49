@@ -1,5 +1,6 @@
 from M49lib import *
-import socket
+import getpass
 hostname = socket.gethostname()
-db.devices.insert_one({'Status': 3, 'Name':hostname, 'User': 'root', 'IP': 'localhost', 'System':RELEASE})
+username = getpass.getuser().lower()
+db.devices.insert_one({'Status': 3, 'Name':hostname, 'User': username, 'IP': 'localhost', 'System':RELEASE})
 db.devices.create_index([ ("Status", -1) ])
