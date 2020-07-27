@@ -1,11 +1,12 @@
+
 const {Router} = require('express');
 const router = Router();
-
+const M49ServerRelease = require('../m49cfg');
 module.exports = router;
 
 router.get('/', (req,res)=>{
     console.log('index');
-    res.status(200).render('index');
+    res.status(200).render('index',{ M49ServerRelease: M49ServerRelease });
 });
 
 
